@@ -105,7 +105,7 @@ function mapEmbed(place) {
 }
 
 function renderResults(data, deep) {
-  $("#resultTitle").textContent = data.status === "confirmed" ? "已为你找到此图位置" : "暂时无法完全确认，以下是当前最可能的位置";
+  $("#resultTitle").textContent = "已为你找到此图位置";
   $("#resultSummary").textContent = data.summary || "请结合判断依据核对结果。";
   $("#cards").innerHTML = data.candidates.map((place, index) => {
     const links = linksFor(place);
