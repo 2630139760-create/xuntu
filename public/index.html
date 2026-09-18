@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f7faf7">
+  <meta name="description" content="寻图：通过照片中的视觉线索推测拍摄地点">
+  <title>寻图｜照片地点推测</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar"><button class="brand" id="homeLogo" aria-label="返回首页"><span>寻</span>图</button><p>从画面线索，寻找世界一隅</p></header>
+  <main>
+    <section id="home" class="view hero active" aria-labelledby="heroTitle">
+      <div class="eyebrow">AI 照片地理推测</div>
+      <h1 id="heroTitle">一张照片，<br><em>寻找它在世界上的位置。</em></h1>
+      <p class="lead">无需提供国家或城市。寻图会阅读画面中的文字、道路、建筑与自然环境，给出谨慎的位置推测。</p>
+      <button class="primary large" id="startButton">开始寻图 <span aria-hidden="true">→</span></button>
+      <p class="fine">图片仅用于本次分析，不会被本站保存。结果为 AI 推测，准确度取决于照片中可辨识的线索。</p>
+    </section>
+
+    <section id="upload" class="view" aria-labelledby="uploadTitle">
+      <div class="section-head"><span class="step">01</span><div><h1 id="uploadTitle">选择一张照片</h1><p>清晰的路牌、店名或独特建筑会带来更准确的结果。</p></div></div>
+      <label class="dropzone" id="dropzone" for="fileInput">
+        <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="fileHelp">
+        <span class="upload-icon" aria-hidden="true">＋</span><strong>从相册选择图片</strong>
+        <span id="fileHelp">支持 JPG、PNG、WEBP，原图不超过 12 MB</span>
+      </label>
+      <div class="preview-wrap hidden" id="previewWrap"><img id="preview" alt="已选择照片的预览"><button class="secondary" id="changeButton">更换照片</button></div>
+      <div class="actions"><button class="primary" id="analyzeButton" disabled>开始分析</button><button class="text-button goHome">返回首页</button></div>
+    </section>
+
+    <section id="loading" class="view loading-view" aria-live="polite" aria-labelledby="loadingTitle">
+      <div class="scanner"><img id="loadingImage" alt="正在分析的照片"><span></span></div>
+      <div class="spinner" aria-hidden="true"></div><h1 id="loadingTitle">正在读取画面线索</h1><p id="loadingDetail">请稍候，分析通常需要十几秒</p>
+    </section>
+
+    <section id="results" class="view" aria-labelledby="resultTitle">
+      <div class="section-head"><span class="step">02</span><div><p class="eyebrow">分析结果</p><h1 id="resultTitle"></h1><p id="resultSummary"></p></div></div>
+      <div id="cards" class="cards"></div>
+      <div class="result-actions"><button class="secondary strong" id="deepButton">不，这不是我要找的地方</button><button class="secondary" id="restartButton">重新上传</button><button class="text-button goHome">返回首页</button></div>
+      <p class="disclaimer">请勿将推测结果用于紧急救援、法律判断或其他高风险用途。</p>
+    </section>
+
+    <section id="error" class="view status-view" role="alert" aria-labelledby="errorTitle"><div class="status-icon">!</div><h1 id="errorTitle">分析遇到问题</h1><p id="errorMessage"></p><button class="primary" id="retryButton">返回重试</button></section>
+  </main>
+
+  <dialog id="licenseDialog" aria-labelledby="licenseTitle">
+    <div class="dialog-mark">许可确认</div><h2 id="licenseTitle">首次使用前，请确认模型许可</h2>
+    <p>寻图使用 Meta Llama 3.2 视觉模型。Cloudflare 要求首次使用者主动同意 <a href="https://www.llama.com/llama3_2/license/" target="_blank" rel="noopener">Meta Llama 3.2 License</a> 与 <a href="https://www.llama.com/llama3_2/use-policy/" target="_blank" rel="noopener">Acceptable Use Policy</a>。</p>
+    <p>点击下方按钮会向模型发送唯一内容 <code>prompt: "agree"</code>，不会上传照片。</p>
+    <div id="licenseError" class="inline-error" aria-live="polite"></div><div class="dialog-actions"><button class="primary" id="agreeButton">我已阅读并同意</button><button class="secondary" id="cancelLicense">暂不使用</button></div>
+  </dialog>
+  <script src="/app.js" defer></script>
+</body>
+</html>

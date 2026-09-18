@@ -1,0 +1,15 @@
+{
+  "name": "xuntu",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "寻图——基于 Cloudflare Workers AI 的照片位置推测工具",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "check": "node --check src/index.js && node --check public/app.js && wrangler deploy --dry-run"
+  },
+  "devDependencies": {
+    "wrangler": "^4.40.0"
+  }
+}
